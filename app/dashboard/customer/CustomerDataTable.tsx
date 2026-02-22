@@ -6,9 +6,19 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { CustomerWithFavoriteInterest } from "@/types/customer";
+import { useCustomerDialog } from "./CustomerDialog/useCustomerDialog";
+import { useCustomer } from "./useCustomer";
 
 export const CustomerDataTable = () => {
-  const columns = getCustomersColumns();
+  const { deleteCustomer } = useCustomer();
+
+  const { setOpen, setCustomerData } = useCustomerDialog();
+
+  const columns = getCustomersColumns({
+    deleteCustomer,
+    setOpen,
+    setCustomerData,
+  });
   const { tags } = useTag();
   const [filters, setFilters] = useState<Record<string, string>>({});
 

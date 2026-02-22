@@ -3,13 +3,18 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
 import { Pencil, Trash } from "lucide-react";
-import { ProductWithTags } from "@/types/product";
-import { useProductDialog } from "./ProductDialog/useProductDialog";
-import { useProduct } from "./useProduct";
+import { ProductInputType, ProductWithTags } from "@/types/product";
+import { Dispatch, SetStateAction } from "react";
 
-export const getProductColumns = (): ColumnDef<ProductWithTags>[] => {
-  const { setOpen, setProductData } = useProductDialog();
-  const { deleteProduct } = useProduct();
+export const getProductColumns = ({
+  setOpen,
+  setProductData,
+  deleteProduct,
+}: {
+  deleteProduct: (id: string) => void;
+  setOpen: Dispatch<SetStateAction<boolean>>;
+  setProductData: Dispatch<SetStateAction<ProductInputType | null>>;
+}): ColumnDef<ProductWithTags>[] => {
 
   return [
     {

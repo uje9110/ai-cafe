@@ -6,9 +6,11 @@ import axios from "axios";
 import React, { useState } from "react";
 import { getPurchaseColumns } from "./columns";
 import { useTag } from "../product/DialogTagSection/useDialogTagSection";
+import { usePurchase } from "./usePurchase";
 
 const PurchaseDataTable = () => {
-  const columns = getPurchaseColumns();
+  const { deletePurchase } = usePurchase();
+  const columns = getPurchaseColumns({ deletePurchase });
   const { tags } = useTag();
 
   const [filters, setFilters] = useState<Record<string, string>>({});

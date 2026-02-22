@@ -116,7 +116,9 @@ export async function POST(req: NextRequest) {
     });
 
     return NextResponse.json(result, { status: 201 });
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+  } catch (error) {
+    console.log(error);
+    
+    return NextResponse.json({ error: "Failed to create purchase"}, { status: 500 });
   }
 }

@@ -3,9 +3,11 @@ import axios from "axios";
 import { getPromoColumns } from "./columns";
 import { DataTable } from "@/components/ui/data-table/data-table";
 import { PromoWithDateAndId } from "@/types/promo";
+import usePromo from "../usePromo";
 
 const PromoDataTable = () => {
-  const columns = getPromoColumns();
+  const { deletePromo } = usePromo();
+  const columns = getPromoColumns({ deletePromo });
 
   const { data: promos } = useQuery<PromoWithDateAndId[]>({
     queryKey: ["promos"],

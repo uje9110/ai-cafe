@@ -4,7 +4,7 @@ import { createContext, useContext, useState, ReactNode } from "react";
 import axios from "axios";
 import { Tag } from "@prisma/client";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { ProductInputType, TagInputType } from "@/types/product";
+import { TagInputType } from "@/types/product";
 
 type TagContextType = {
   tags?: Tag[];

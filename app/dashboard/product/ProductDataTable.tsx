@@ -1,6 +1,4 @@
-import { useProduct } from "./useProduct";
 import { getProductColumns } from "./columns";
-import { DataTable } from "@/components/ui/data-table/data-table";
 import { useTag } from "./DialogTagSection/useDialogTagSection";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
@@ -8,9 +6,15 @@ import axios from "axios";
 import { DataTableFiltersType } from "@/components/ui/data-table/data-table-filter";
 import { ProductWithTags } from "@/types/product";
 import { DataTableWithFilters } from "@/components/ui/data-table/data-table-with-filters";
+import { useProductDialog } from "./ProductDialog/useProductDialog";
+import { useProduct } from "./useProduct";
 
 const ProductDataTable = () => {
-  const columns = getProductColumns();
+  const { setOpen, setProductData } = useProductDialog();
+  const { deleteProduct } = useProduct();
+
+  const columns = getProductColumns({ setOpen, setProductData, deleteProduct });
+
   const { tags } = useTag();
 
   const [filters, setFilters] = useState<Record<string, string>>({});

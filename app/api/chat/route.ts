@@ -1,16 +1,29 @@
-import { streamText } from "ai";
+import { ModelMessage, streamText } from "ai";
 import { prisma } from "@/lib/prisma";
 import { openrouter } from "@/lib/ai/ai";
 
-export async function POST(req: Request) {
-  const body = await req.json();
+export type InputMessagePart = {
+  type: "text" | "image" | "file";
+  text?: string;
+};
 
-  const messages = body.messages.map((msg: any) => ({
+export type InputMessage = {
+  id: string;
+  role: "user" | "assistant" | "system";
+  parts: InputMessagePart[];
+  trigger?: "submit-message" | "click-button";
+};
+
+export async function POST(req: Request) {
+  const body: { id: string; trigger: string; messages: InputMessage[] } =
+    await req.json();
+
+  const messages: ModelMessage[] = body.messages.map((msg) => ({
     role: msg.role,
     content:
       msg.parts
-        ?.filter((p: any) => p.type === "text")
-        .map((p: any) => p.text)
+        ?.filter((p) => p.type === "text")
+        .map((p) => p.text)
         .join("") ?? "",
   }));
 

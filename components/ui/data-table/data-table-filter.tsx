@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { SearchFilter } from "./search-filter";
 import { SelectFilter } from "./select-filter";
 

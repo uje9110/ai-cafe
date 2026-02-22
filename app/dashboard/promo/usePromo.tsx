@@ -15,6 +15,7 @@ const usePromo = () => {
       const res = await axios.post("/api/ai/promo");
       setPromos(res.data);
     } catch (error) {
+      console.log(error);
       toast.error("Failed to generate promo", {
         description: "Please try again.",
       });

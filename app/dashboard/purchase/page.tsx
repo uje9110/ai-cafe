@@ -7,7 +7,7 @@ import { CustomerWithFavoriteInterest } from "@/types/customer";
 import { TagProvider } from "../product/DialogTagSection/useDialogTagSection";
 import PurchaseDataTable from "./PurchaseDataTable";
 
-const page = () => {
+const Page = () => {
   const { data: products } = useQuery<ProductWithTags[]>({
     queryKey: ["products"],
     queryFn: async () => {
@@ -37,4 +37,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

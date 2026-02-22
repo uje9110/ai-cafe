@@ -1,7 +1,21 @@
 import { generateText } from "ai";
 import { openrouter } from "./ai";
 
-export async function generatePromo(insights: any) {
+type InsightsType = {
+  totalCustomers: number;
+  topInterests: {
+    tag: string;
+    count: number;
+    percentage: number;
+  }[];
+  topProducts: {
+    product: string;
+    count: number;
+    percentage: number;
+  }[];
+};
+
+export async function generatePromo(insights: InsightsType) {
   const { text } = await generateText({
     model: openrouter("arcee-ai/trinity-large-preview:free"),
     system: `

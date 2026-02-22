@@ -4,11 +4,12 @@ import { ColumnDef } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
 import { Trash } from "lucide-react";
 import { PromoWithDateAndId } from "@/types/promo";
-import usePromo from "../usePromo";
 
-export const getPromoColumns = (): ColumnDef<PromoWithDateAndId>[] => {
-  const { deletePromo } = usePromo();
-
+export const getPromoColumns = ({
+  deletePromo,
+}: {
+  deletePromo: (id: string) => void;
+}): ColumnDef<PromoWithDateAndId>[] => {
   return [
     {
       accessorKey: "theme",

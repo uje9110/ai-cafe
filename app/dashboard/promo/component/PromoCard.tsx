@@ -28,7 +28,6 @@ const PromoCard: FC<PromoCardProps> = ({
   promo,
   index,
   isPromoExist,
-  setSelectedPromos,
   toggleSelectedPromo,
 }) => {
   const copyMessage = (message: string) => {

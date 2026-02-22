@@ -4,13 +4,6 @@ import { usePathname } from "next/navigation";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
 
-const routeTitles: Record<string, string> = {
-  "/dashboard": "Dashboard",
-  "/dashboard/customer": "Customer",
-  "/dashboard/promo": "Promo",
-  "/dashboard/chat": "Chat",
-};
-
 const DashboardHeader = () => {
   const pathname = usePathname();
   const page = pathname.split("/");

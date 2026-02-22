@@ -4,10 +4,8 @@ import { ColumnDef } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
 import { Trash } from "lucide-react";
 import { PurchaseWithItems } from "@/types/purchase";
-import { usePurchase } from "./usePurchase";
 
-export const getPurchaseColumns = (): ColumnDef<PurchaseWithItems>[] => {
-  const { deletePurchase } = usePurchase();
+export const getPurchaseColumns = ({deletePurchase} : {deletePurchase : (id : string) => void}): ColumnDef<PurchaseWithItems>[] => {
 
   return [
     {
@@ -53,16 +51,6 @@ export const getPurchaseColumns = (): ColumnDef<PurchaseWithItems>[] => {
       header: "Actions",
       cell: ({ row }) => {
         const purchase = row.original;
-
-        const editedPurchase = {
-          id: purchase.id,
-          customerId: purchase.customerId,
-          items: purchase.items.map((item) => ({
-            productId: item.productId,
-            quantity: item.quantity,
-          })),
-        };
-
         return (
           <div className="flex items-center gap-2">
             <Button
