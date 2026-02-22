@@ -2,14 +2,15 @@
   "name": "ai-cafe",
   "version": "0.1.0",
   "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint",
-    "type-check": "tsc --noEmit",
-    "check": "npm run lint && npm run type-check"
-  },
+"scripts": {
+  "dev": "next dev",
+  "build": "npx prisma generate && next build",
+  "start": "next start",
+  "lint": "eslint",
+  "type-check": "tsc --noEmit",
+  "check": "npm run lint && npm run type-check",
+  "postinstall": "npx prisma generate"
+},
   "dependencies": {
     "@ai-sdk/openai": "^3.0.30",
     "@ai-sdk/react": "^3.0.99",
