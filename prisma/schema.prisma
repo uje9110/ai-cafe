@@ -1,0 +1,115 @@
+datasource db {
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Customer {
+  id        String   @id @default(cuid())
+  name      String
+  email     String?  @unique
+  createdAt DateTime @default(now())
+
+  interests Interest[]
+  purchases Purchase[]
+  favorites Favorite[]
+}
+
+model Product {
+  id    String  @id @default(cuid())
+  name  String
+  price Int
+
+  tags           ProductTag[]
+  purchaseItems  PurchaseItem[]
+  favoredBy      Favorite[]
+}
+
+model Tag {
+  id   String @id @default(cuid())
+  name String @unique
+
+  interests  Interest[]
+  products   ProductTag[]
+}
+
+model Favorite {
+  customer   Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  customerId String
+
+  product    Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId  String
+
+  createdAt  DateTime @default(now())
+
+  @@id([customerId, productId])
+  @@index([productId])
+}
+
+model ProductTag {
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId String
+
+  tag       Tag     @relation(fields: [tagId], references: [id], onDelete: Cascade)
+  tagId     String
+
+  @@id([productId, tagId])
+}
+
+model Interest {
+  id         String   @id @default(cuid())
+
+  customer   Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  customerId String
+
+  tag        Tag      @relation(fields: [tagId], references: [id])
+  tagId      String
+
+  @@unique([customerId, tagId])
+  @@index([customerId])
+  @@index([tagId])
+}
+
+model Purchase {
+  id         String         @id @default(cuid())
+
+  customer   Customer       @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  customerId String
+
+  items      PurchaseItem[]
+
+  total      Decimal        @default(0)
+  createdAt  DateTime       @default(now())
+
+  @@index([customerId])
+}
+
+model PurchaseItem {
+  id         String   @id @default(cuid())
+
+  purchase   Purchase @relation(fields: [purchaseId], references: [id], onDelete: Cascade)
+  purchaseId String
+
+  product    Product  @relation(fields: [productId], references: [id])
+  productId  String
+
+  quantity   Int      @default(1)
+  subtotal   Decimal
+
+  @@index([purchaseId])
+  @@index([productId])
+}
+
+model Promo {
+  id                String   @id @default(cuid())
+  theme             String
+  segment           String
+  whyNow            String
+  message           String
+  bestTimeWindow    String
+  createdAt         DateTime @default(now())
+
+  @@index([id])
+}
