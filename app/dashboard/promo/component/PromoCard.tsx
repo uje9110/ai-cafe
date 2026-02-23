@@ -56,8 +56,9 @@ const PromoCard: FC<PromoCardProps> = ({
 
         {/* Best Time */}
         {promo.bestTimeWindow && (
-          <div>
-            <Badge variant="outline">{promo.bestTimeWindow}</Badge>
+          <div className="border border-slate-400/50 p-1 pb-2 rounded-md">
+            <span className="text-xs font-semibold">Best time window:</span>
+            <p className="text-xs ">{promo.bestTimeWindow}</p>
           </div>
         )}
 

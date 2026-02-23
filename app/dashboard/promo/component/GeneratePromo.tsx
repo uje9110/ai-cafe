@@ -22,15 +22,15 @@ export default function GeneratePromo() {
   return (
     <div className="space-y-8 max-w-full">
       {/* Header */}
-      <div className="flex justify-between items-center">
-        <div>
-          <h1 className="text-3xl font-bold">Global Promo Ideas</h1>
-          <p className="text-muted-foreground">
+      <div className="flex flex-col gap-4 justify-between items-center md:flex-row">
+        <div className="flex flex-col justify-start items-start ">
+          <h1 className="text-2xl font-bold text-start md:text-3xl ">Global Promo Ideas</h1>
+          <p className="text-muted-foreground text-sm text-start md:text-base ">
             AI-powered campaigns based on all customer interests
           </p>
         </div>
 
-        <div className="flex items-center justify-center gap-2">
+        <div className="flex items-center justify-between md:justify-end gap-2 w-full">
           <Button onClick={generatePromo} disabled={loading}>
             {loading ? "Generating..." : "Generate Promo"}
           </Button>

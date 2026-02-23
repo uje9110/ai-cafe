@@ -13,7 +13,12 @@ export default function CopyButton({ text }: { text: string }) {
   }
 
   return (
-    <Button variant="outline" size="sm" onClick={handleCopy}>
+    <Button
+      size="sm"
+      variant="secondary"
+      className="w-full"
+      onClick={handleCopy}
+    >
       {copied ? "Copied!" : "Copy Message"}
     </Button>
   );

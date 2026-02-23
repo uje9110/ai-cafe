@@ -5,18 +5,17 @@ import { getDashboardData } from "./getDashboardData";
 import CopyButton from "@/components/ui/copy-button";
 
 const Page = async () => {
-
   const { totalCustomers, topInterests, weeklyPromos, newCustomersThisWeek } =
     await getDashboardData();
 
   return (
-    <div className="p-8 space-y-10">
+    <div className="p-4 md:p-8 space-y-10">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold tracking-tight">
+        <h1 className="text-2xl font-bold tracking-tight md:text-3xl">
           Dashboard Overview
         </h1>
-        <p className="text-muted-foreground">
+        <p className="text-muted-foreground text-sm md:text-base">
           Insights about your customers and campaigns this week.
         </p>
       </div>
@@ -101,19 +100,19 @@ const Page = async () => {
           </Card>
         )}
 
-        <div className="grid gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {weeklyPromos.map((promo) => (
-            <Card key={promo.id} className="hover:shadow-md transition-shadow">
+            <Card key={promo.id} className="hover:shadow-md transition-shadow py-0 overflow-hidden">
               <CardContent className="p-5 space-y-3">
-                <div className="flex items-start justify-between">
-                  <div>
+                <div className="flex flex-col items-start justify-between gap-3">
+                  <Badge variant="outline">{promo.bestTimeWindow}</Badge>
+
+                  <div >
                     <h3 className="font-semibold text-lg">{promo.theme}</h3>
                     <p className="text-sm text-muted-foreground">
-                      Segment: {promo.segment}
+                      <b> Segment:</b> {promo.segment}
                     </p>
                   </div>
-
-                  <Badge variant="outline">{promo.bestTimeWindow}</Badge>
                 </div>
 
                 <p className="text-sm leading-relaxed">{promo.message}</p>

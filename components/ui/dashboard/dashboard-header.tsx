@@ -26,7 +26,7 @@ const DashboardHeader = ({ session }: { session: Session }) => {
   };
 
   return (
-    <header className="flex h-16 items-center justify-between border-b bg-background px-6 w-full">
+    <header className="flex h-16 items-center justify-between border-b bg-background px-2 md:px-6 w-full">
       {/* LEFT SECTION */}
       <div className="flex items-center gap-4">
         <div className="flex items-center gap-3">
@@ -40,8 +40,8 @@ const DashboardHeader = ({ session }: { session: Session }) => {
             <span className="text-lg font-semibold tracking-tight">
               {formatTitle(current)}
             </span>
-            <span className="text-xs text-muted-foreground">
-              Manage and monitor your CRM
+            <span className="text-xs text-muted-foreground ">
+              Manage your CRM
             </span>
           </div>
         </div>
