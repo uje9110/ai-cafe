@@ -31,11 +31,6 @@ const PurchaseDataTable = () => {
       filterName: "name",
       filterType: "search",
     },
-    {
-      filterName: "interest",
-      filterType: "select",
-      filterValues: tags.map((t) => t.name),
-    },
   ];
 
   return (

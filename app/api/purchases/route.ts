@@ -2,8 +2,21 @@ import { prisma } from "@/lib/prisma";
 import { Prisma } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+  const { searchParams } = new URL(request.url);
+  const name = searchParams.get("name")?.trim();
+
   const purchases = await prisma.purchase.findMany({
+    where: name
+      ? {
+          customer: {
+            name: {
+              contains: name,
+              mode: "insensitive",
+            },
+          },
+        }
+      : undefined,
     include: {
       customer: true,
       items: {
