@@ -28,8 +28,6 @@ export const SelectFilter = ({
 
   return (
     <div className="space-y-2 w-full md:w-64">
-      <Label className="capitalize">{filterName}</Label>
-
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button

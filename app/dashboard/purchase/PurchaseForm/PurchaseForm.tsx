@@ -13,7 +13,7 @@ import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Trash2, Plus } from "lucide-react";
-import { CustomerSelect } from "./CustomerSelect";
+import { CustomerSelect } from "./CustomerSelectOrCreate";
 import { ProductSelect } from "./ProductSelect";
 import { usePurchaseForm } from "./usePurchaseForm";
 import { CustomerWithFavoriteInterest } from "@/types/customer";

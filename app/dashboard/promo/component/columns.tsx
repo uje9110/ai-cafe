@@ -1,5 +1,11 @@
 "use client";
 
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { ColumnDef } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
 import { Trash } from "lucide-react";
@@ -18,20 +24,60 @@ export const getPromoColumns = ({
     {
       accessorKey: "segment",
       header: "Segment",
+      cell: ({ row }) => {
+        const value = row.original.segment;
+
+        return (
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <div className="max-w-40 truncate cursor-pointer">{value}</div>
+              </TooltipTrigger>
+              <TooltipContent className="max-w-xs wrap-break-words">
+                {value}
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        );
+      },
     },
     {
       accessorKey: "whyNow",
       header: "Why Now",
       cell: ({ row }) => {
-        return <div className="max-w-62.5 truncate">{row.original.whyNow}</div>;
+        const value = row.original.whyNow;
+
+        return (
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <div className="max-w-40 truncate cursor-pointer">{value}</div>
+              </TooltipTrigger>
+              <TooltipContent className="max-w-xs wrap-break-words">
+                {value}
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        );
       },
     },
     {
       accessorKey: "message",
       header: "Message",
       cell: ({ row }) => {
+        const value = row.original.message;
+
         return (
-          <div className="max-w-62.5 truncate">{row.original.message}</div>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <div className="max-w-40 truncate cursor-pointer">{value}</div>
+              </TooltipTrigger>
+              <TooltipContent className="max-w-xs wrap-break-words">
+                {value}
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         );
       },
     },

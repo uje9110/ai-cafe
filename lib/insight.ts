@@ -1,27 +1,38 @@
 import { CustomerWithFavoriteInterest } from "@/types/customer";
+import { prisma } from "./prisma";
 
-
-export function buildInsights(
-  customers: CustomerWithFavoriteInterest[]
-) {
+export const buildInsights = async () => {
   const interestCount: Record<string, number> = {};
   const productCount: Record<string, number> = {};
+
+  const customers = await prisma.customer.findMany({
+    include: {
+      favorites: {
+        include: {
+          product: true,
+        },
+      },
+      interests: {
+        include: {
+          tag: true,
+        },
+      },
+    },
+  });
 
   customers.forEach((customer) => {
     // Count interests
     customer.interests.forEach((interest) => {
       const tagName = interest.tag.name;
 
-      interestCount[tagName] =
-        (interestCount[tagName] || 0) + 1;
+      interestCount[tagName] = (interestCount[tagName] || 0) + 1;
     });
 
     // Count favorite products
     customer.favorites.forEach((favorite) => {
       const productName = favorite.product.name;
 
-      productCount[productName] =
-        (productCount[productName] || 0) + 1;
+      productCount[productName] = (productCount[productName] || 0) + 1;
     });
   });
 
@@ -48,4 +59,4 @@ export function buildInsights(
     topInterests,
     topProducts,
   };
-}
+};

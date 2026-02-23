@@ -1,49 +1,18 @@
-import { ModelMessage, streamText } from "ai";
-import { prisma } from "@/lib/prisma";
-import { openrouter } from "@/lib/ai/ai";
-
-export type InputMessagePart = {
-  type: "text" | "image" | "file";
-  text?: string;
-};
-
-export type InputMessage = {
-  id: string;
-  role: "user" | "assistant" | "system";
-  parts: InputMessagePart[];
-  trigger?: "submit-message" | "click-button";
-};
+import {
+  convertToModelMessages,
+  streamText,
+  UIMessage,
+} from "ai";
+import { google } from "@ai-sdk/google";
+import { buildInsights } from "@/lib/insight";
 
 export async function POST(req: Request) {
-  const body: { id: string; trigger: string; messages: InputMessage[] } =
-    await req.json();
+  const { messages } = (await req.json()) as { messages: UIMessage[] };
 
-  const messages: ModelMessage[] = body.messages.map((msg) => ({
-    role: msg.role,
-    content:
-      msg.parts
-        ?.filter((p) => p.type === "text")
-        .map((p) => p.text)
-        .join("") ?? "",
-  }));
-
-  const customers = await prisma.customer.findMany({
-    include: {
-      favorites: { include: { product: true } },
-      interests: { include: { tag: true } },
-    },
-  });
-
-  const insightSummary = customers.map((customer) => ({
-    name: customer.name,
-    email: customer.email,
-    favorites: customer.favorites.map((f) => f.product.name),
-    interests: customer.interests.map((i) => i.tag.name),
-  }));
+  const insightSummary = await buildInsights();
 
   const result = streamText({
-    model: openrouter("arcee-ai/trinity-large-preview:free"),
-
+    model: google("gemini-2.5-flash"),
     system: `
 You are a business intelligence AI assistant.
 
@@ -55,7 +24,7 @@ Rules:
 - Be concise
 `,
 
-    messages,
+    messages: await convertToModelMessages(messages),
   });
 
   return result.toUIMessageStreamResponse();

@@ -2,7 +2,7 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
-import { Pencil, Trash } from "lucide-react";
+import { ArrowUpDown, Pencil, Trash } from "lucide-react";
 import {
   CustomerInputType,
   CustomerWithFavoriteInterest,
@@ -22,7 +22,20 @@ export const getCustomersColumns = ({
   return [
     {
       accessorKey: "name",
-      header: "Name",
+      accessorFn: (row) => row.name,
+      header: ({ column }) => {
+        return (
+          <div
+            className="px-0 flex gap-2 items-center"
+            onClick={() => {
+              column.toggleSorting(column.getIsSorted() === "asc");
+            }}
+          >
+            <ArrowUpDown className="h-4 w-4" />
+            Customer
+          </div>
+        );
+      },
     },
     {
       accessorKey: "email",

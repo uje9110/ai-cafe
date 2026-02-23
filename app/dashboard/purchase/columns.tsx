@@ -2,15 +2,31 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
-import { Trash } from "lucide-react";
+import { ArrowUpDown, Trash } from "lucide-react";
 import { PurchaseWithItems } from "@/types/purchase";
 
-export const getPurchaseColumns = ({deletePurchase} : {deletePurchase : (id : string) => void}): ColumnDef<PurchaseWithItems>[] => {
-
+export const getPurchaseColumns = ({
+  deletePurchase,
+}: {
+  deletePurchase: (id: string) => void;
+}): ColumnDef<PurchaseWithItems>[] => {
   return [
     {
       id: "customer",
-      header: "Customer",
+      accessorFn: (row) => row.customer.name,
+      header: ({ column }) => {
+        return (
+          <div
+            className="px-0 flex gap-2 items-center"
+            onClick={() => {
+              column.toggleSorting(column.getIsSorted() === "asc");
+            }}
+          >
+            <ArrowUpDown className="h-4 w-4" />
+            Customer
+          </div>
+        );
+      },
       cell: ({ row }) => {
         return row.original.customer.name;
       },
@@ -34,14 +50,40 @@ export const getPurchaseColumns = ({deletePurchase} : {deletePurchase : (id : st
     },
     {
       accessorKey: "total",
-      header: "Total",
+      accessorFn: (row) => row.total,
+      header: ({ column }) => {
+        return (
+          <div
+            className="px-0 flex gap-2 items-center"
+            onClick={() => {
+              column.toggleSorting(column.getIsSorted() === "asc");
+            }}
+          >
+            <ArrowUpDown className="h-4 w-4" />
+            Total
+          </div>
+        );
+      },
       cell: ({ row }) => {
         return `$${row.original.total}`;
       },
     },
     {
       accessorKey: "createdAt",
-      header: "Created At",
+      accessorFn: (row) => row.createdAt,
+      header: ({ column }) => {
+        return (
+          <div
+            className="px-0 flex gap-2 items-center"
+            onClick={() => {
+              column.toggleSorting(column.getIsSorted() === "asc");
+            }}
+          >
+            <ArrowUpDown className="h-4 w-4" />
+            Created At
+          </div>
+        );
+      },
       cell: ({ row }) => {
         return new Date(row.original.createdAt).toLocaleDateString();
       },

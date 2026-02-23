@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { useDebounce } from "@/hooks/useDebouce";
+import { Search } from "lucide-react";
 
 type SearchFilterProps = {
   filterName: string;
@@ -28,13 +28,13 @@ export const SearchFilter = ({
   }, [debouncedValue, filterName, setFilters]);
 
   return (
-    <div className="space-y-2 w-full md:w-64">
-      <Label className="capitalize">{filterName}</Label>
+    <div className="space-y-2 w-full md:w-64 relative">
       <Input
         value={inputValue}
         placeholder={`Search ${filterName}...`}
         onChange={(e) => setInputValue(e.target.value)}
       />
+      <Search size={18} className="absolute top-2 right-2 text-slate-400" />
     </div>
   );
 };

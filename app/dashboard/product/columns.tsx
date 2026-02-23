@@ -2,7 +2,7 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
-import { Pencil, Trash } from "lucide-react";
+import { ArrowUpDown, Pencil, Trash } from "lucide-react";
 import { ProductInputType, ProductWithTags } from "@/types/product";
 import { Dispatch, SetStateAction } from "react";
 
@@ -15,15 +15,40 @@ export const getProductColumns = ({
   setOpen: Dispatch<SetStateAction<boolean>>;
   setProductData: Dispatch<SetStateAction<ProductInputType | null>>;
 }): ColumnDef<ProductWithTags>[] => {
-
   return [
     {
       accessorKey: "name",
-      header: "Name",
+      accessorFn: (row) => row.name,
+      header: ({ column }) => {
+        return (
+          <div
+            className="px-0 flex gap-2 items-center"
+            onClick={() => {
+              column.toggleSorting(column.getIsSorted() === "asc");
+            }}
+          >
+            <ArrowUpDown className="h-4 w-4" />
+            Customer
+          </div>
+        );
+      },
     },
     {
       accessorKey: "price",
-      header: "Price",
+      accessorFn: (row) => row.price,
+      header: ({ column }) => {
+        return (
+          <div
+            className="px-0 flex gap-2 items-center"
+            onClick={() => {
+              column.toggleSorting(column.getIsSorted() === "asc");
+            }}
+          >
+            <ArrowUpDown className="h-4 w-4" />
+            Price
+          </div>
+        );
+      },
     },
     {
       id: "tags",
