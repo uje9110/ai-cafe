@@ -111,7 +111,7 @@ export function CustomerSelect({ customers, value, onChange }: Props) {
                   }}
                   className="text-primary"
                 >
-                  <Plus /> Create "{search}"
+                  <Plus /> Create {`"${search}"`}
                 </CommandItem>
               )}
             </CommandList>

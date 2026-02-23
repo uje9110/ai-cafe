@@ -1,5 +1,4 @@
 import { Dispatch, SetStateAction, useState } from "react";
-import { Label } from "../label";
 import { Popover, PopoverContent, PopoverTrigger } from "../popover";
 import { Button } from "../button";
 import { Check, ChevronsUpDown } from "lucide-react";

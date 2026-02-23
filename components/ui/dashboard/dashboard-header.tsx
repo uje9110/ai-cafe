@@ -15,8 +15,7 @@ const formatTitle = (slug?: string) => {
 
 const DashboardHeader = ({ session }: { session: Session }) => {
   const pathname = usePathname();
-  const router = useRouter();
-
+  
   const segments = pathname.split("/").filter(Boolean);
   const current = segments[1] || "dashboard";
 

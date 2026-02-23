@@ -1,4 +1,4 @@
-import { Users, TrendingUp, Sparkles, Copy, UserPlus } from "lucide-react";
+import { Users, TrendingUp, Sparkles, UserPlus } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { getDashboardData } from "./getDashboardData";
