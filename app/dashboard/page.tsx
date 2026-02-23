@@ -5,6 +5,7 @@ import { getDashboardData } from "./getDashboardData";
 import CopyButton from "@/components/ui/copy-button";
 
 const Page = async () => {
+
   const { totalCustomers, topInterests, weeklyPromos, newCustomersThisWeek } =
     await getDashboardData();
 
