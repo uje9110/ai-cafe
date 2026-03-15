@@ -4,7 +4,13 @@ import { useState, useTransition } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -49,16 +55,28 @@ export default function LoginPage() {
             </div>
           </div>
 
-          <CardTitle className="text-2xl font-semibold">
-            Welcome Back
-          </CardTitle>
+          <CardTitle className="text-2xl font-semibold">Welcome Back</CardTitle>
 
-          <CardDescription>
-            Sign in to access your dashboard
-          </CardDescription>
+          <CardDescription>Sign in to access your dashboard</CardDescription>
         </CardHeader>
 
         <CardContent className="space-y-5">
+          {/* Demo Info */}
+          <div className="text-sm rounded-lg border bg-muted/40 p-3 space-y-1">
+            <p className="font-medium">Demo Access</p>
+            <p className="text-muted-foreground">
+              This is a demo application. You can log in using:
+            </p>
+            <p className="text-muted-foreground">
+              <span className="font-medium">Email:</span> admin@email.com
+            </p>
+            <p className="text-muted-foreground">
+              <span className="font-medium">Password:</span> admin123
+            </p>
+            <p className="text-muted-foreground">
+              Or create a new account to test the app.
+            </p>
+          </div>
           {/* Email */}
           <div className="space-y-2">
             <Label>Email</Label>
@@ -91,9 +109,7 @@ export default function LoginPage() {
 
           {/* Error */}
           {error && (
-            <p className="text-sm text-destructive text-center">
-              {error}
-            </p>
+            <p className="text-sm text-destructive text-center">{error}</p>
           )}
 
           <Button
